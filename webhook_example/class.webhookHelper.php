@@ -12,6 +12,27 @@ class webhookHelper {
         );
     }
 
+    public function addReplyLinkMessage($username,$jid,$LinkTitle,$LinkURL,$ThumbURL){
+        $this->response[] = array(
+            'reqType'=>'sendTextMessage',
+            'username'=>$username,
+            'jid'=>$jid,
+            'LinkTitle'=>$LinkTitle,
+            'LinkURL'=>$LinkURL,
+            'ThumbURL'=>$ThumbURL
+        );
+    }
+
+    public function addReplyVoiceMessage($username,$jid,$message){
+        $this->response[] = array(
+            'reqType'=>'sendVoiceMessage',
+            'username'=>$username,
+            'jid'=>$jid,
+            'fileName'=>$fileName,
+            'fileURL'=>$fileURL,
+        );
+    }
+
     public function addReplyMediaMessage($username,$jid,$fileName,$fileURL,$caption=""){
         $this->response[] = array(
             'reqType'=>'sendMediaMessage',
