@@ -3,6 +3,12 @@ include 'class.webhookHelper.php';
 $webhookHelper = new webhookHelper();
 
     $data = json_decode(file_get_contents('php://input'), true);
+    //record log of webhook events
+	$json = json_encode($data, JSON_PRETTY_PRINT)."\n";
+    $myfile = fopen(date("Y-m-d_H").".txt", "a+") or die("Unable to open file!");
+    fwrite($myfile,$json);
+    fclose($myfile);
+
     $dummyTimestamp = 1556194032; // Dummy
     $dataUsername = $data['username'];
     $dataType = $data['dataType'];
@@ -25,7 +31,7 @@ $webhookHelper = new webhookHelper();
                         // Message is Not sent by me
                         if($Timestamp>$dummyTimestamp){
                             // only to attach replies with message received after $dummyTimestamp
-                            if($messageText="TEST"){
+                            if($messageText!="TEST"){
                                 // Text Message
                                 //$webhookHelper->addReplyTextMessage($dataUsername,$RemoteJid,"[Plain] Hello, Text :)");
                                 //$webhookHelper->addReplyTextMessage($dataUsername,$RemoteJid,"[Regional] नमस्ते!");
