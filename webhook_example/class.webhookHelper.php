@@ -12,12 +12,13 @@ class webhookHelper {
         );
     }
 
-    public function addReplyLinkMessage($username,$jid,$LinkTitle,$LinkURL,$ThumbURL){
+    public function addReplyLinkMessage($username,$jid,$LinkTitle,$LinkMessage,$LinkURL,$ThumbURL){
         $this->response[] = array(
             'reqType'=>'sendTextMessage',
             'username'=>$username,
             'jid'=>$jid,
             'LinkTitle'=>$LinkTitle,
+            'message' => base64_encode($LinkMessage),
             'LinkURL'=>$LinkURL,
             'ThumbURL'=>$ThumbURL
         );
